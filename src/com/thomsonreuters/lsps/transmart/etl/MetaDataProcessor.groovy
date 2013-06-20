@@ -23,7 +23,7 @@ package com.thomsonreuters.lsps.transmart.etl
 import groovy.sql.Sql
 
 import java.io.File;
-
+//FIXME Fix for Postgres
 class MetaDataProcessor extends DataProcessor {
 
 	public MetaDataProcessor(Object conf) {

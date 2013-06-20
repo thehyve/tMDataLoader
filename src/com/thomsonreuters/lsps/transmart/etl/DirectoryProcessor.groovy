@@ -90,7 +90,7 @@ class DirectoryProcessor {
 			// looping through studies
 			// dir name is the study
 			
-			def studyName = it.name
+    			def studyName = it.name
 			config.logger.log "== Found study: ${studyName} =="
 			
 			def studyInfo = [ 'name': studyName, 'node': "${parentNode}\\${studyName}".toString() ]

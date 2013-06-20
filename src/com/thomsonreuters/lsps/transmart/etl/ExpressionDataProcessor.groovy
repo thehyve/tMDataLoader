@@ -73,11 +73,11 @@ class ExpressionDataProcessor extends DataProcessor {
 			config.logger.log("Study ID=${studyId}; Node=${studyNode}; Data Type=${studyDataType}")
 			
 			if (studyInfo['runPlatformLoad']) {
-				sql.call("{call i2b2_load_annotation_deapp()}")
+				sql.call("{? = call i2b2_load_annotation_deapp(?)}", [Sql.NUMERIC, jobId])
 			}
 			
-			sql.call("{call i2b2_process_mrna_data (?, ?, ?, null, null, 'N', ?, ?)}",
-				[ studyId, studyNode, studyDataType, jobId, Sql.NUMERIC ]) {}
+			sql.call("{? = call i2b2_process_mrna_data (?, ?, ?, null, null, 'N', ?)}",
+				[Sql.NUMERIC, studyId, studyNode, studyDataType, jobId]) {}
 		}
 		else {
 			config.logger.log(LogType.ERROR, "Study ID or Node or DataType not defined!")

@@ -46,7 +46,7 @@ abstract class DataProcessor {
 			// poll log & watch for stored procedure to finish	
 			
 			// retrieve job number
-			sql.call('{CALL cz_start_audit(?,?,?)}', [getProcedureName(), config.db.username, Sql.NUMERIC]) {
+			sql.call('{? = CALL cz_start_audit(?,?)}', [Sql.NUMERIC, getProcedureName(), config.db.username]) {
 				jobId ->
 				
 				config.logger.log("Job ID: ${jobId}")
@@ -86,11 +86,11 @@ abstract class DataProcessor {
 				
 				if (res) {
 					config.logger.log("Procedure completed successfully")
-					sql.call("{CALL cz_end_audit(?,?)}", [jobId, 'SUCCESS'])
+					sql.call("{? = CALL cz_end_audit(?,?)}", [Sql.NUMERIC, jobId, 'SUCCESS'])
 				}
 				else {
 					config.logger.log(LogType.ERROR, "Procedure completed with errors!")
-					sql.call("{CALL cz_end_audit(?,?)}", [jobId, 'FAIL'])
+					sql.call("{? = CALL cz_end_audit(?,?)}", [Sql.NUMERIC, jobId, 'FAIL'])
 				}
 			}
 			

@@ -23,7 +23,7 @@ package com.thomsonreuters.lsps.transmart.etl
 import groovy.sql.Sql
 
 import java.io.File;
-
+//FIXME Fix for Postgres
 class RBMDataProcessor extends DataProcessor {
 
 	public RBMDataProcessor(Object conf) {
